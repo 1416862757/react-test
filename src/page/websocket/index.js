@@ -12,13 +12,16 @@ export default class WebSocket extends Component {
     }
 
     sendMessage = (message) => {
-        this.refWebSocket.sendMessage(message);
+        let room = {
+            "roomName": "38912",
+            "password": "123456",
+        };
+        this.refWebSocket.sendMessage(JSON.stringify(room));
     }
 
     render() {
         return (
             <div className='WebSocketBox'>
-
                 <div className='ContentBox'>
                     <textarea/>
                 </div>
@@ -32,8 +35,13 @@ export default class WebSocket extends Component {
                        } defaultValue={this.state.content}/>
                 <input className='SendButton' type='button' value='发送'
                        onClick={() => {
-                           this.refWebSocket.sendMessage(this.state.content);
+                           let room = {
+                               "roomName": "38912",
+                               "password": "123456",
+                           };
+                           this.refWebSocket.sendMessage(JSON.stringify(room));
                        }}/>
+                {/*<button>创建房间</button>*/}
 
                 <Websocket url='ws://localhost:8899/ws'
                            onMessage={(data) => {
